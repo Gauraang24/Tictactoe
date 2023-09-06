@@ -12,7 +12,7 @@ const statusMessage = ({ isXNext, winner, squares }) => {
         if (!winner && noMovesLeft) {
             return (
                 <div>
-                    <span className="text-orange">O</span> and
+                    <span className="text-orange">O</span> and{' '}
                     <span className="text-green">X</span> Tied
                 </div>)
         }
