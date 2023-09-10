@@ -1,7 +1,9 @@
 import './components/styles.scss'
 import { useState } from "react"
 import Board from './components/Board'
-import { calculateWinner } from './components/winner'
+// import { calculateWinner } from './components/winner'
+import { calculateWinner } from './components/winner';
+
 import StatusMessage from './components/statusMessage'
 import HistoryList from './components/History'
 
@@ -14,7 +16,9 @@ function App() {
 
   const gamingBoard = History[currentMove]
 
-  const winner = calculateWinner(gamingBoard.squares)
+  // const [winner, winningSquares] = calculateWinner(gamingBoard.squares)
+  const{winner, winningSquares} = calculateWinner(gamingBoard.squares);
+
 
   const handleSquareClick = (clickedPosition) => {
 
@@ -24,12 +28,7 @@ function App() {
 
     setHistory((currHistory) => {
       const isTraversing = currentMove + 1 !== currHistory.length
-
-
-
       const lastGamingState = isTraversing ? currHistory[currentMove] : History[History.length - 1]
-
-
       const nextSquaresState = lastGamingState.squares.map((Val, pos) => {
         if (clickedPosition === pos) {
           return lastGamingState.isXNext ? "X" : "O";
@@ -61,9 +60,9 @@ function App() {
 
     <div className='app'>
       <StatusMessage winner={winner} gamingBoard={gamingBoard} />
-      <Board squares={gamingBoard.squares} handleSquareClick={handleSquareClick} />
+      <Board squares={gamingBoard.squares} handleSquareClick={handleSquareClick} winningSquares={winningSquares}/>
 
-      <button className={`btn-reset ${winner ? "active": ""}`} type='button'  onClick={onNewGameStart}>Start New Game</button>
+      <button className={`btn-reset ${winner ? "active": "" }`} type='button'  onClick={onNewGameStart}>Start New Game</button>
       <h2>Current Game History</h2>
       <HistoryList History={History} moveTo={moveTo} currentMove={currentMove} />
     </div>
